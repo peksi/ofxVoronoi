@@ -21,7 +21,7 @@ public:
     
     void clear();
     void generate(bool ordered=true);
-    void draw(bool curve);
+    vector<ofPolyline> draw(bool curve);
     
     bool isBorder(glm::vec2 _pt);
     

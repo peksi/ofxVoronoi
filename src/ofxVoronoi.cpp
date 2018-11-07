@@ -77,7 +77,9 @@ void ofxVoronoi::generate(bool ordered) {
 }
 
 //--------------------------------------------------------------
-void ofxVoronoi::draw(bool curve) {
+vector<ofPolyline> ofxVoronoi::draw(bool curve) {
+    vector<ofPolyline> polylineVec;
+    
     ofSetLineWidth(0);
     ofNoFill();
     
@@ -110,14 +112,12 @@ void ofxVoronoi::draw(bool curve) {
                     p.close();
                 }
             }
-            
-            
-            
+        
             ofPushMatrix();
             ofTranslate(cells[i].pt.x * 0.2, cells[i].pt.y * 0.2);
             ofScale(0.8, 0.8);
             ofFill();
-            p.draw();
+            polylineVec.push_back(p);
             ofPopMatrix();
         }
         
@@ -127,6 +127,7 @@ void ofxVoronoi::draw(bool curve) {
         ofFill();
         ofDrawCircle(cells[i].pt, 2);
     }
+    return polylineVec;
 }
 
 //--------------------------------------------------------------
