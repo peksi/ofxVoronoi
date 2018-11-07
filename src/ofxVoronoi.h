@@ -5,14 +5,14 @@
 
 class ofxVoronoiCell {
   public:
-    vector<ofPoint> pts;
-    ofPoint pt;
+    vector<glm::vec2> pts;
+    glm::vec2 pt;
 };
 
 class ofxVoronoi {
 private:
     ofRectangle bounds;
-    vector<ofPoint> points;
+    vector<glm::vec2> points;
     vector<ofxVoronoiCell> cells;
     
 public:
@@ -21,19 +21,19 @@ public:
     
     void clear();
     void generate(bool ordered=true);
-    void draw();
+    void draw(bool curve);
     
-    bool isBorder(ofPoint _pt);
+    bool isBorder(glm::vec2 _pt);
     
     void setBounds(ofRectangle _bounds);
-    void setPoints(vector<ofPoint> _points);
-    void addPoint(ofPoint _point);
-    void addPoints(vector<ofPoint> _points);
+    void setPoints(vector<glm::vec2> _points);
+    void addPoint(glm::vec2 _point);
+    void addPoints(vector<glm::vec2> _points);
     
     ofRectangle getBounds();
-    vector<ofPoint>& getPoints();
+    vector<glm::vec2>& getPoints();
     vector <ofxVoronoiCell>& getCells();
-    ofxVoronoiCell& getCell(ofPoint _point, bool approximate=false);
+    ofxVoronoiCell& getCell(glm::vec2 _point, bool approximate=false);
     
     //borg
     void relax();
