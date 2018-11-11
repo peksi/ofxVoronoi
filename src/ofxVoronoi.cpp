@@ -87,46 +87,20 @@ vector<ofPolyline> ofxVoronoi::draw(bool curve) {
     ofSetColor(220);
     ofDrawRectangle(bounds);
     
-    ofSetColor(180, 0, 0);
     
+    // Draw cell borders
+    ofSetColor(120);
     for(int i=0; i<cells.size(); i++) {
-        // Draw cell borders
-        ofSetColor(120);
-        for(int i=0; i<cells.size(); i++) {
-            ofPolyline p;
-            if(curve){
-                for(int j=0; j<cells[i].pts.size(); j++){
-                    p.curveTo(cells[i].pts[j][0], cells[i].pts[j][1]);
-                }
-                p.curveTo(cells[i].pts[0][0], cells[i].pts[0][1]);
-                p.curveTo(cells[i].pts[1][0], cells[i].pts[1][1]);
-                p.curveTo(cells[i].pts[2][0], cells[i].pts[2][1]);
-                // stop late to get full circle
-                
-                
-                // TODO: find centerpoints
-                
-            } else {
-                for(int j=0; j<cells[i].pts.size(); j++){
-                    p.addVertex(cells[i].pts[j][0], cells[i].pts[j][1]);
-                    p.close();
-                }
-            }
-        
-            ofPushMatrix();
-            ofTranslate(cells[i].pt.x * 0.2, cells[i].pt.y * 0.2);
-            ofScale(0.8, 0.8);
-            ofFill();
-            polylineVec.push_back(p);
-            ofPopMatrix();
+        ofPolyline p;
+
+        for(int j=0; j<cells[i].pts.size(); j++){
+            p.addVertex(cells[i].pts[j][0], cells[i].pts[j][1]);
+            p.close();
         }
-        
-        ofFill();
-        // Draw cell points
-        ofSetColor(180, 0, 0);
-        ofFill();
-        ofDrawCircle(cells[i].pt, 2);
+
+        polylineVec.push_back(p);
     }
+    
     return polylineVec;
 }
 
